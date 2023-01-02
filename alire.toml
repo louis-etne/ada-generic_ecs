@@ -1,0 +1,7 @@
+name = "generic_ecs"
+description = "Shiny new project"
+version = "0.1.0-dev"
+
+authors = ["Louis ETIENNE"]
+maintainers = ["Louis ETIENNE <louis.etienne82@orange.fr>"]
+maintainers-logins = ["louis-etne"]
