@@ -4,19 +4,17 @@ with Components;
 with Components.Position;
 with ECS;
 
-package body Generic_ECS_Test is
+package body Generic_ECS_Tests is
 
-   procedure Test_Create_Entity (T : in out Test)
-   is
-      Registery : ECS.Registery.Registery_Type := ECS.Registery.Initialize;
+   procedure Test_Create_Entity (T : in out Test) is
+      Registery : ECS.Registery.Registery_Type       := ECS.Registery.Initialize;
       Entity    : constant ECS.Registery.Entity_Type := Registery.Create;
    begin
       AUnit.Assertions.Assert (Registery.Count = 1, "wrong entity count");
    end Test_Create_Entity;
 
-   procedure Test_Clear_Registery (T : in out Test)
-   is
-      Registery : ECS.Registery.Registery_Type := ECS.Registery.Initialize;
+   procedure Test_Clear_Registery (T : in out Test) is
+      Registery : ECS.Registery.Registery_Type       := ECS.Registery.Initialize;
       Unused    : constant ECS.Registery.Entity_Type := Registery.Create;
    begin
       AUnit.Assertions.Assert (Registery.Count = 1, "wrong entity count before clear");
@@ -24,12 +22,10 @@ package body Generic_ECS_Test is
       AUnit.Assertions.Assert (Registery.Count = 0, "wrong entity count after clear");
    end Test_Clear_Registery;
 
-   procedure Test_Entity_Component (T : in out Test)
-   is
-      Registery : ECS.Registery.Registery_Type := ECS.Registery.Initialize;
-      Entity    : constant ECS.Registery.Entity_Type := Registery.Create;
-      Position  : constant Components.Position.Position_Component_Access_Type :=
-         new Components.Position.Position_Component_Type;
+   procedure Test_Entity_Component (T : in out Test) is
+      Registery : ECS.Registery.Registery_Type                                := ECS.Registery.Initialize;
+      Entity    : constant ECS.Registery.Entity_Type                          := Registery.Create;
+      Position : constant Components.Position.Position_Component_Access_Type := new Components.Position.Position_Component_Type;
    begin
       Position.X := 5.0;
       Position.Y := 5.0;
@@ -53,7 +49,7 @@ package body Generic_ECS_Test is
          use type Components.Position.Position_Component_Access_Type;
 
          New_Position : constant Components.Position.Position_Component_Access_Type :=
-            Components.Position.Position_Component_Access_Type (Registery.Get (Entity, Components.Position_Kind));
+           Components.Position.Position_Component_Access_Type (Registery.Get (Entity, Components.Position_Kind));
       begin
          AUnit.Assertions.Assert (New_Position /= null, "New_Position is null");
 
@@ -68,7 +64,7 @@ package body Generic_ECS_Test is
          use type Components.Position.Position_Component_Access_Type;
 
          New_Position : constant Components.Position.Position_Component_Access_Type :=
-            Components.Position.Position_Component_Access_Type (Registery.Get (Entity, Components.Position_Kind));
+           Components.Position.Position_Component_Access_Type (Registery.Get (Entity, Components.Position_Kind));
       begin
          AUnit.Assertions.Assert (New_Position.X = 7.0, "New_Position.X /= 7.0");
       end;
@@ -83,4 +79,4 @@ package body Generic_ECS_Test is
 
    end Test_Entity_Component;
 
-end Generic_ECS_Test;
+end Generic_ECS_Tests;

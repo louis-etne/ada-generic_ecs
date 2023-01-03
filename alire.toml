@@ -1,7 +1,7 @@
 name = "generic_ecs"
-description = "Shiny new project"
+description = "A generic ECS for Ada language inspired by Entt"
 version = "0.1.0-dev"
 
-authors = ["Louis ETIENNE"]
-maintainers = ["Louis ETIENNE <louis.etienne82@orange.fr>"]
+authors = ["louis-etne"]
+maintainers = ["louis-etne"]
 maintainers-logins = ["louis-etne"]

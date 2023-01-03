@@ -211,6 +211,36 @@ package body Internal.Generic_Registery is
       return Components;
    end Get_Set_Components;
 
+   ------------
+   -- System --
+   ------------
+   procedure Each
+     (Registery  : in out Registery_Type;
+      Components :        Selection_Package.Selection_Type;
+      System     :        System_Type)
+   is
+      Entity : Entity_Type;
+   begin
+      for Cursor in Registery.Entities.Iterate loop
+         Entity := Entity_Component_Hashed_Maps.Key (Cursor);
+         if Registery.Has
+             (Entity     => Entity,
+              Components => Components) then
+            System (Registery, Entity);
+         end if;
+      end loop;
+   end Each;
+
+   procedure Each
+     (Registery : in out Registery_Type;
+      System    :        System_Type)
+   is
+   begin
+      for Cursor in Registery.Entities.Iterate loop
+         System (Registery, Entity_Component_Hashed_Maps.Key (Cursor));
+      end loop;
+   end Each;
+
    -------------
    -- Private --
    -------------

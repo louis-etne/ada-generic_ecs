@@ -118,6 +118,25 @@ is
       Entity    : Entity_Type)
       return Component_Package.Component_Boolean_Array_Type;
 
+   type System_Type is access procedure
+       (Registery : Registery_Type;
+        Entity    : Entity_Type);
+
+   ------------
+   -- System --
+   ------------
+
+   -- Run the system on each entity according to the component selection
+   procedure Each
+     (Registery  : in out Registery_Type;
+      Components :        Selection_Package.Selection_Type;
+      System     :        System_Type);
+
+   -- Run the system on each entity
+   procedure Each
+     (Registery : in out Registery_Type;
+      System    :        System_Type);
+
 private
 
    -- An entity is just an unique id
