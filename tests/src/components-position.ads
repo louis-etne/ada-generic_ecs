@@ -2,7 +2,7 @@ with ECS;
 
 package Components.Position is
 
-   type Position_Component_Type is new ECS.Component.Component_Interface_Type with record
+   type Position_Component_Type is new ECS.Component_Interface_Type with record
       X, Y, Z : Float;
    end record;
 

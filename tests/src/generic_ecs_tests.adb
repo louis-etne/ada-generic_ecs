@@ -7,15 +7,15 @@ with ECS;
 package body Generic_ECS_Tests is
 
    procedure Test_Create_Entity (T : in out Test) is
-      Registery : ECS.Registery.Registery_Type       := ECS.Registery.Initialize;
-      Entity    : constant ECS.Registery.Entity_Type := Registery.Create;
+      Registery : ECS.Registery_Type       := ECS.Initialize;
+      Entity    : constant ECS.Entity_Type := Registery.Create;
    begin
       AUnit.Assertions.Assert (Registery.Count = 1, "wrong entity count");
    end Test_Create_Entity;
 
    procedure Test_Clear_Registery (T : in out Test) is
-      Registery : ECS.Registery.Registery_Type       := ECS.Registery.Initialize;
-      Unused    : constant ECS.Registery.Entity_Type := Registery.Create;
+      Registery : ECS.Registery_Type       := ECS.Initialize;
+      Unused    : constant ECS.Entity_Type := Registery.Create;
    begin
       AUnit.Assertions.Assert (Registery.Count = 1, "wrong entity count before clear");
       Registery.Clear;
@@ -23,8 +23,8 @@ package body Generic_ECS_Tests is
    end Test_Clear_Registery;
 
    procedure Test_Entity_Component (T : in out Test) is
-      Registery : ECS.Registery.Registery_Type                                := ECS.Registery.Initialize;
-      Entity    : constant ECS.Registery.Entity_Type                          := Registery.Create;
+      Registery : ECS.Registery_Type                                := ECS.Initialize;
+      Entity    : constant ECS.Entity_Type                          := Registery.Create;
       Position : constant Components.Position.Position_Component_Access_Type := new Components.Position.Position_Component_Type;
    begin
       Position.X := 5.0;
@@ -34,11 +34,11 @@ package body Generic_ECS_Tests is
       Registery.Set
         (Entity    => Entity,
          Kind      => Components.Position_Kind,
-         Component => ECS.Component.Component_Interface_Class_Access_Type (Position));
+         Component => ECS.Component_Interface_Class_Access_Type (Position));
 
       -- Test components presence
       declare
-         Set : constant ECS.Component.Component_Boolean_Array_Type := Registery.Get_Set_Components (Entity);
+         Set : constant ECS.Component_Boolean_Array_Type := Registery.Get_Set_Components (Entity);
       begin
          AUnit.Assertions.Assert (Set (Components.Position_Kind), "position is not set");
          AUnit.Assertions.Assert (not Set (Components.Rotation_Kind), "rotation is set");
