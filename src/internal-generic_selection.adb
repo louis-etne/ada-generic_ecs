@@ -1,7 +1,7 @@
 package body Internal.Generic_Selection is
 
    function Select_None
-     (Selection_Kind : Selection_Kind_Type := Inclusive_Or_None)
+     (Selection_Kind : Selection_Kind_Type := Inclusive)
       return Selection_Type
    is
    begin
@@ -9,7 +9,7 @@ package body Internal.Generic_Selection is
    end Select_None;
 
    function Select_All
-     (Selection_Kind : Selection_Kind_Type := Inclusive_Or_None)
+     (Selection_Kind : Selection_Kind_Type := Inclusive)
       return Selection_Type
    is
    begin
@@ -93,12 +93,9 @@ package body Internal.Generic_Selection is
    is
    begin
       case Selection.Selection_Kind is
-         when Inclusive_Or_None =>
-            return True;
-
          when Inclusive =>
             for Kind in Component_Package.Component_Kind_Type loop
-               if Selection.Is_Selected (Kind) = Components_Array (Kind) then
+               if Selection.Is_Selected (Kind) and then Components_Array (Kind) then
                   return True;
                end if;
             end loop;
@@ -107,7 +104,7 @@ package body Internal.Generic_Selection is
 
          when Exclusive =>
             for Kind in Component_Package.Component_Kind_Type loop
-               if Selection.Is_Selected (Kind) /= Components_Array (Kind) then
+               if not Selection.Is_Selected (Kind) and then Components_Array (Kind) then
                   return False;
                end if;
             end loop;

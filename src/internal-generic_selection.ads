@@ -8,19 +8,18 @@ is
 
    type Selection_Kind_Type is
      (Inclusive,           -- At least one of the component
-      Inclusive_Or_None,   -- At least one of the component or none
       Exclusive);          -- Exactly all the selected components
 
    type Selection_Type is tagged private;
 
    -- Return an object with no components selected
    function Select_None
-     (Selection_Kind : Selection_Kind_Type := Inclusive_Or_None)
+     (Selection_Kind : Selection_Kind_Type := Inclusive)
       return Selection_Type;
 
    -- Return an object with every components selected
    function Select_All
-     (Selection_Kind : Selection_Kind_Type := Inclusive_Or_None)
+     (Selection_Kind : Selection_Kind_Type := Inclusive)
       return Selection_Type;
 
    -- Return the kind of the selection

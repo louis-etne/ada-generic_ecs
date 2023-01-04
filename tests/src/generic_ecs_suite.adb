@@ -11,6 +11,8 @@ package body Generic_ECS_Suite is
    Test_Create_Entity    : aliased Runner.Test_Case;
    Test_Clear_Registery  : aliased Runner.Test_Case;
    Test_Entity_Component : aliased Runner.Test_Case;
+   Test_Selection        : aliased Runner.Test_Case;
+   Test_System_Type      : aliased Runner.Test_Case;
 
    function Suite return AUnit.Test_Suites.Access_Test_Suite is
    begin
@@ -31,6 +33,18 @@ package body Generic_ECS_Suite is
          Name => "Test the entity component relation (set and get)",
          Test => Generic_ECS_Tests.Test_Entity_Component'Access);
       Result.Add_Test (Test_Entity_Component'Access);
+
+      Runner.Create
+        (TC   => Test_Selection,
+         Name => "Test selection package",
+         Test => Generic_ECS_Tests.Test_Selection'Access);
+      Result.Add_Test (Test_Selection'Access);
+
+      Runner.Create
+        (TC   => Test_System_Type,
+         Name => "Test system interface type",
+         Test => Generic_ECS_Tests.Test_System_Type'Access);
+      Result.Add_Test (Test_System_Type'Access);
 
       return Result'Access;
    end Suite;

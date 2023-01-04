@@ -70,7 +70,7 @@ The important elements of each subpackage (types or subprograms) has been rename
 
 First of all you have to create a registery:
 ```ada
-Registery : ECS.Registery_Type := ECS.Initializex;
+Registery : ECS.Registery_Type := ECS.Initialize;
 ```
 
 From it, you can create an entity which simply an unique identifier:

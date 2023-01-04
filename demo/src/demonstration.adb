@@ -10,7 +10,10 @@ procedure Demonstration is
    end record;
    type Position_Access_Type is access all Position_Type;
 
-   procedure System (Registery : ECS.Registery_Type; Entity : ECS.Entity_Type) is
+   procedure System
+     (Registery : ECS.Registery_Type;
+      Entity    : ECS.Entity_Type)
+   is
       Position : constant Position_Access_Type := Position_Access_Type (Registery.Get (Entity, Position_Kind));
    begin
       Ada.Text_IO.Put_Line ("X:" & Position.X'Img);
@@ -21,7 +24,7 @@ begin
    -- Create 5 entities
    for Index in 1 .. 5 loop
       declare
-         Entity   : constant ECS.Entity_Type := Registery.Create;
+         Entity   : constant ECS.Entity_Type      := Registery.Create;
          Position : constant Position_Access_Type := new Position_Type;
       begin
          Position.X := Float (Index);

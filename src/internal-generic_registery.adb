@@ -126,7 +126,7 @@ package body Internal.Generic_Registery is
       end if;
 
       case Components.Selection_Kind is
-         when Selection_Package.Inclusive | Selection_Package.Inclusive_Or_None =>
+         when Selection_Package.Inclusive =>
             Unset_Components;
          when Selection_Package.Exclusive =>
             if Registery.Has (Entity, Components) then
@@ -223,9 +223,7 @@ package body Internal.Generic_Registery is
    begin
       for Cursor in Registery.Entities.Iterate loop
          Entity := Entity_Component_Hashed_Maps.Key (Cursor);
-         if Registery.Has
-             (Entity     => Entity,
-              Components => Components) then
+         if Registery.Has (Entity, Components) then
             System (Registery, Entity);
          end if;
       end loop;
@@ -238,6 +236,31 @@ package body Internal.Generic_Registery is
    begin
       for Cursor in Registery.Entities.Iterate loop
          System (Registery, Entity_Component_Hashed_Maps.Key (Cursor));
+      end loop;
+   end Each;
+
+   procedure Each
+     (Registery  : in out Registery_Type;
+      Components :        Selection_Package.Selection_Type;
+      System     : in out System_Interface_Type'Class)
+   is
+      Entity : Entity_Type;
+   begin
+      for Cursor in Registery.Entities.Iterate loop
+         Entity := Entity_Component_Hashed_Maps.Key (Cursor);
+         if Registery.Has (Entity, Components) then
+            System.Run (Registery'Unchecked_Access, Entity);
+         end if;
+      end loop;
+   end Each;
+
+   procedure Each
+     (Registery : in out Registery_Type;
+      System    : in out System_Interface_Type'Class)
+   is
+   begin
+      for Cursor in Registery.Entities.Iterate loop
+         System.Run (Registery'Unchecked_Access, Entity_Component_Hashed_Maps.Key (Cursor));
       end loop;
    end Each;
 

@@ -15,6 +15,7 @@ is
    --------------------------
 
    type Registery_Type is tagged limited private;
+   type Registery_Access_Type is access all Registery_Type;
 
    -- Initialize and return a new registery
    function Initialize return Registery_Type;
@@ -91,6 +92,12 @@ is
      (Registery  : in out Registery_Type;
       Components :        Selection_Package.Selection_Type);
 
+   -- Return an array with each component set to true if it is set for the entity
+   function Get_Set_Components
+     (Registery : Registery_Type;
+      Entity    : Entity_Type)
+      return Component_Package.Component_Boolean_Array_Type;
+
    -- Check if the entity has component kind
    function Has
      (Registery : Registery_Type;
@@ -112,19 +119,13 @@ is
       Component : Component_Package.Component_Kind_Type)
       return Component_Package.Component_Interface_Class_Access_Type;
 
-   -- Return an array with each component set to true if it is set for the entity
-   function Get_Set_Components
-     (Registery : Registery_Type;
-      Entity    : Entity_Type)
-      return Component_Package.Component_Boolean_Array_Type;
+      -----------------------
+      -- System management --
+      -----------------------
 
    type System_Type is access procedure
        (Registery : Registery_Type;
         Entity    : Entity_Type);
-
-   ------------
-   -- System --
-   ------------
 
    -- Run the system on each entity according to the component selection
    procedure Each
@@ -136,6 +137,26 @@ is
    procedure Each
      (Registery : in out Registery_Type;
       System    :        System_Type);
+
+   -- Interface allows more possibilities than a simple subprogram
+   type System_Interface_Type is interface;
+
+   -- This procedure will be called on each entity
+   procedure Run
+     (System   : in out System_Interface_Type;
+      Register :        Registery_Access_Type;
+      Entity   :        Entity_Type) is abstract;
+
+      -- Run the system on each entity according to the component selection
+   procedure Each
+     (Registery  : in out Registery_Type;
+      Components :        Selection_Package.Selection_Type;
+      System     : in out System_Interface_Type'Class);
+
+   -- Run the system on each entity
+   procedure Each
+     (Registery : in out Registery_Type;
+      System    : in out System_Interface_Type'Class);
 
 private
 

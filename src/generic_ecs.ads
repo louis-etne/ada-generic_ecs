@@ -14,7 +14,7 @@ package Generic_ECS is
    subtype Component_Interface_Type is Component.Component_Interface_Type;
    subtype Component_Interface_Class_Access_Type is Component.Component_Interface_Class_Access_Type;
    subtype Component_Boolean_Array_Type is Component.Component_Boolean_Array_Type;
-   
+
    subtype Registery_Type is Registery.Registery_Type;
    subtype Entity_Type is Registery.Entity_Type;
 
