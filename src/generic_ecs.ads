@@ -17,6 +17,8 @@ package Generic_ECS is
 
    subtype Registery_Type is Registery.Registery_Type;
    subtype Entity_Type is Registery.Entity_Type;
+   subtype System_Type is Registery.System_Type;
+   subtype System_Interface_Type is Registery.System_Interface_Type;
 
    function Initialize return Registery_Type renames Registery.Initialize;
 
