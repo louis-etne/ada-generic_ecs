@@ -9,7 +9,7 @@ package body Generic_ECS_Suite is
    Result : aliased AUnit.Test_Suites.Test_Suite;
 
    Test_Create_Entity    : aliased Runner.Test_Case;
-   Test_Clear_Registery  : aliased Runner.Test_Case;
+   Test_Clear_Registry   : aliased Runner.Test_Case;
    Test_Entity_Component : aliased Runner.Test_Case;
    Test_Selection        : aliased Runner.Test_Case;
    Test_System_Type      : aliased Runner.Test_Case;
@@ -23,10 +23,10 @@ package body Generic_ECS_Suite is
       Result.Add_Test (Test_Create_Entity'Access);
 
       Runner.Create
-        (TC   => Test_Clear_Registery,
+        (TC   => Test_Clear_Registry,
          Name => "Clear the registery",
-         Test => Generic_ECS_Tests.Test_Clear_Registery'Access);
-      Result.Add_Test (Test_Clear_Registery'Access);
+         Test => Generic_ECS_Tests.Test_Clear_Registry'Access);
+      Result.Add_Test (Test_Clear_Registry'Access);
 
       Runner.Create
         (TC   => Test_Entity_Component,

@@ -11,27 +11,27 @@ procedure Demonstration is
    type Position_Access_Type is access all Position_Type;
 
    procedure System
-     (Registery : ECS.Registery_Type;
-      Entity    : ECS.Entity_Type)
+     (Registry : ECS.Registry_Type;
+      Entity   : ECS.Entity_Type)
    is
-      Position : constant Position_Access_Type := Position_Access_Type (Registery.Get (Entity, Position_Kind));
+      Position : constant Position_Access_Type := Position_Access_Type (Registry.Get (Entity, Position_Kind));
    begin
       Ada.Text_IO.Put_Line ("X:" & Position.X'Img);
    end System;
 
-   Registery : ECS.Registery_Type := ECS.Initialize;
+   Registry : ECS.Registry_Type := ECS.Initialize;
 begin
    -- Create 5 entities
    for Index in 1 .. 5 loop
       declare
-         Entity   : constant ECS.Entity_Type      := Registery.Create;
+         Entity   : constant ECS.Entity_Type      := Registry.Create;
          Position : constant Position_Access_Type := new Position_Type;
       begin
          Position.X := Float (Index);
 
          -- Set the component only for odd indexes
          if Index mod 2 = 1 then
-            Registery.Set (Entity, Position_Kind, ECS.Component_Interface_Class_Access_Type (Position));
+            Registry.Set (Entity, Position_Kind, ECS.Component_Interface_Class_Access_Type (Position));
          end if;
       end;
    end loop;
@@ -43,6 +43,6 @@ begin
       Selection.Select_Component (Position_Kind);
       Selection.Selection_Kind (ECS.Selection.Inclusive);
 
-      Registery.Each (Selection, System'Access);
+      Registry.Each (Selection, System'Access);
    end;
 end Demonstration;
